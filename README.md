@@ -1,5 +1,8 @@
 # react-music
 
-React 
-ReChart
-Sematic UI 
+>> SPA
+>> Update per day
+
+>> React 
+>> ReChart [npm install recharts]
+>> Sematic UI 
