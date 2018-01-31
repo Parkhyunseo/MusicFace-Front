@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { 
   Header,
-  ChartTest
+  ChartTest,
+  TwoLevelPieChart
 } from './components';
 import * as api from './lib/api';
 import './App.css';
@@ -9,16 +10,44 @@ import './App.css';
 
 class App extends Component {
 
+  state = {
+    loading: false,
+    data: null,
+    genre: null,
+    rank: null,
+  }
+
   getData = async () => {
+    if (this.state.loading) return;
+    
+    this.setState({
+      loading: true
+    });
+    
     try{
-      const response = await api.getData();
+      const data_response = await api.getData();
+      const genre_response = await api.getGenre();
+      const rank_response = await api.getRank();
       
-      const data = response.data;
+      const data = data_response.data;
+      const genre = genre_response.data;
+      const rank = rank_response.data;
       
+      this.setState({
+        data: data,
+        genre: genre,
+        rank: rank
+      });
+    
       console.log(data);
+      console.log(genre);
     }catch(e){
       console.log(e);
     }
+    
+    this.setState({
+      loading: false
+    });
   }
 
   componentDidMount(){
@@ -26,19 +55,14 @@ class App extends Component {
   }
 
   render() {
-    const data = [
-  { name: 'Page A', uv: 4000, pv: 2400, amt: 2400, time: 1 },
-  { name: 'Page B', uv: 3000, pv: 1398, amt: 2210, time: 3 },
-  { name: 'Page C', uv: 2000, pv: 9800, amt: 2290, time: 9 },
-  { name: 'Page D', uv: 2780, pv: 3908, amt: 2000, time: 10 },
-  { name: 'Page E', uv: 2500, pv: 4800, amt: 2181, time: 12 },
-  { name: 'Page F', uv: 1220, pv: 3800, amt: 2500, time: 16 },
-  { name: 'Page G', uv: 2300, pv: 4300, amt: 2100, time: 18 },
-];
+    const { data, loading, rank, genre } = this.state;
+    
     return (
       <div>
         <Header/>
-        <ChartTest data={data}/>
+        <RankList data={ rank } loading={ loading }/>
+        <ChartTest data={ data } loading={ loading }/>
+        <TwoLevelPieChart genre={ genre } loading = { loading }/>
       </div>
     );
   }
