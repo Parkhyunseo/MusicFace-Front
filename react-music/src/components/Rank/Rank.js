@@ -1,5 +1,5 @@
 import React from 'react';
-import 'Rank.css';
+import './Rank.css';
 
 const Rank = ({id, title}) => {
 	return (

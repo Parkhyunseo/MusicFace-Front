@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { 
   Header,
+  RankList,
   ChartTest,
   TwoLevelPieChart
 } from './components';
