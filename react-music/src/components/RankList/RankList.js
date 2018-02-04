@@ -12,7 +12,12 @@ class RankList extends Component {
     }
     
     render() {
+        
         const { data, loading } = this.props;
+        
+        if(!loading)
+            return;
+        
         
         /*if(loading){
             <div className='Loading'>
@@ -23,16 +28,15 @@ class RankList extends Component {
         
         console.log(data);
         
-        if(!loading){
-            const rankList = data.map(
-                ({id, title}) => (
-                    <Rank
-                        id={id}
-                        title={title}
-                    />
-                )
-            );
-        }
+        
+        const rankList = data.map(
+            ({id, title}) => (
+                <Rank
+                    id={id}
+                    title={title}
+                />
+            )
+        );
         
         return (
             <div>

@@ -3,11 +3,11 @@ import {
   Header,
   RankList,
   ChartTest,
-  TwoLevelPieChart
+  TwoLevelPieChart,
+  WordChart
 } from './components';
 import * as api from './lib/api';
 import './App.css';
-
 
 class App extends Component {
 
@@ -29,15 +29,18 @@ class App extends Component {
       const data_response = await api.getData();
       const genre_response = await api.getGenre();
       const rank_response = await api.getRank();
+      const word_response = await api.getWords();
       
       const data = data_response.data;
       const genre = genre_response.data;
       const rank = rank_response.data;
+      const words = word_response.data;
       
       this.setState({
         data: data,
         genre: genre,
-        rank: rank
+        rank: rank,
+        words: words
       });
     
       console.log(data);
@@ -56,14 +59,14 @@ class App extends Component {
   }
 
   render() {
-    const { data, loading, rank, genre } = this.state;
+    const { data, loading, rank, genre, words } = this.state;
     
     return (
       <div>
         <Header/>
         <RankList data={ rank } loading={ loading }/>
-        <ChartTest data={ data } loading={ loading }/>
-        <TwoLevelPieChart genre={ genre } loading = { loading }/>
+        <TwoLevelPieChart genre={ genre } loading ={ loading }/>
+        <WordChart data={ words } loading ={loading}/>
       </div>
     );
   }

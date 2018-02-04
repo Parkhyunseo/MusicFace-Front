@@ -3,11 +3,13 @@ import Rank from './Rank/Rank';
 import RankList from './RankList/RankList';
 import ChartTest from './Charts/ChartTest';
 import TwoLevelPieChart from './TwoLevelPieChart/TwoLevelPieChart';
+import WordChart from './WordChart/WordChart'
 
 export {
     Header,
     Rank,
     RankList,
     ChartTest,
-    TwoLevelPieChart
+    TwoLevelPieChart,
+    WordChart
 };

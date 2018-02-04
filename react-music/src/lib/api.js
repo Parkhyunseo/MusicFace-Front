@@ -11,3 +11,7 @@ export function getRank(){
 export function getGenre(){
     return axios.get('http://flask-music-hyunseo.c9users.io:8080/genre')
 }
+
+export function getWords(){
+    return axios.get('http://flask-music-hyunseo.c9users.io:8080/words')
+}
